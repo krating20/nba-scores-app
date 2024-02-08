@@ -5,38 +5,25 @@ import json
 games = scoreboard.ScoreBoard()
 
 # json
-json_string = games.get_json()
+data= games.get_dict()
 
-data = json.loads(json_string)
-
-# Extract game information
-
-game_info = []
-
+games_info = []
 for game in data['scoreboard']['games']:
-    game_code = game['gameCode']
-    game_status_text = game['gameStatusText']
-    home_score = game['homeTeam']['score']
-    away_score = game['awayTeam']['score']
-    home_team_tricode = game['homeTeam']['teamTricode']
-    away_team_tricode = game['awayTeam']['teamTricode']
-
-    game_data = {
-        "gameCode": game_code,
-        "gameStatusText": game_status_text,
-        "homeTeam": {
-            "teamTricode": home_team_tricode,
-            "score": home_score
+    game_info = {
+        'gameCode': game['gameCode'],
+        'gameStatusText': game['gameStatusText'],
+        'homeTeam': {
+            'teamTricode': game['homeTeam']['teamTricode'],
+            'score': game['homeTeam']['score']
         },
-        "awayTeam": {
-            "teamTricode": away_team_tricode,
-            "score": away_score
+        'awayTeam': {
+            'teamTricode': game['awayTeam']['teamTricode'],
+            'score': game['awayTeam']['score']
         }
     }
-    game_info.append(game_data)
+    games_info.append(game_info)
 
-# Convert the list of game data into JSON format
-json_output = json.dumps(game_info, indent=4)
-
-# Print the JSON
-print(json_output)
+# Printing the restructured game information
+for game in games_info:
+    print(game)
+    

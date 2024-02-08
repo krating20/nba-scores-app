@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBA Scoreboard</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>NBA Scoreboard</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Game Code</th>
+                <th>Status</th>
+                <th>Home Team</th>
+                <th>Away Team</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games_info %}
+                <tr>
+                    <td>{{ game.gameCode }}</td>
+                    <td>{{ game.gameStatusText }}</td>
+                    <td>{{ game.homeTeam.teamTricode }} {{ game.homeTeam.score }}</td>
+                    <td>{{ game.awayTeam.teamTricode }} {{ game.awayTeam.score }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
